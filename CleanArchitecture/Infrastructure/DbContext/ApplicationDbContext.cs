@@ -4,12 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Infrastructure.DbContext;
 
-public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    : Microsoft.EntityFrameworkCore.DbContext(options)
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {   
-    }
-    
     //DbSet<Domain.Property> Properties { get; set; }
     DbSet<Domain.Property> Properties => Set<Domain.Property>();
     DbSet<Domain.Image> Images { get; set; }

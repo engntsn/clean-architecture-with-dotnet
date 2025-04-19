@@ -11,7 +11,10 @@ public static class ServiceCollectionExtensions
 {
     public static  IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.AddTransient<IPropertyRepo, PropertyRepo>()
-            .AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        return
+            services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")))
+                .AddTransient<IPropertyRepo, PropertyRepo>();
+        
     }
 }

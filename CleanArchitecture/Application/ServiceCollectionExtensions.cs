@@ -9,9 +9,13 @@ public static class ServiceCollectionExtensions
 {
     public static void AddApplicationServices(this IServiceCollection services)
     {
-        services
+        IServiceCollection serviceCollection = services
             .AddAutoMapper(Assembly.GetExecutingAssembly())
-            .AddMediatR(Assembly.GetExecutingAssembly())
+            .AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+            })
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     }
+
 }
